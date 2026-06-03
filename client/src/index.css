@@ -1,0 +1,114 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ─── Ubuntu Dark Theme ──────────────────────────────────────────────────── */
+@theme inline {
+  --color-background: oklch(18.5% 0 0);
+  --color-foreground: oklch(95% 0 0);
+  --color-card: oklch(21% 0 0);
+  --color-card-foreground: oklch(95% 0 0);
+  --color-popover: oklch(21% 0 0);
+  --color-popover-foreground: oklch(95% 0 0);
+  --color-primary: oklch(60% 0.18 240);
+  --color-primary-foreground: oklch(100% 0 0);
+  --color-secondary: oklch(25% 0 0);
+  --color-secondary-foreground: oklch(85% 0 0);
+  --color-muted: oklch(25% 0 0);
+  --color-muted-foreground: oklch(55% 0 0);
+  --color-accent: oklch(48% 0.18 145);
+  --color-accent-foreground: oklch(100% 0 0);
+  --color-destructive: oklch(50% 0.22 25);
+  --color-destructive-foreground: oklch(100% 0 0);
+  --color-border: oklch(27% 0 0);
+  --color-input: oklch(25% 0 0);
+  --color-ring: oklch(60% 0.18 240);
+
+  /* Ubuntu brand colors */
+  --ubuntu-blue: #2E96FF;
+  --ubuntu-blue-hover: #1a7de8;
+  --ubuntu-green: #0E8420;
+  --ubuntu-green-hover: #0a6318;
+  --ubuntu-bg: #262626;
+  --ubuntu-navbar: #202020;
+  --ubuntu-card: #2F2F2F;
+  --ubuntu-border: #373737;
+  --ubuntu-muted: #808080;
+  --ubuntu-text-dim: #707070;
+
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
+  --radius: 0px;
+
+  --font-sans: "Ubuntu", "Inter", system-ui, sans-serif;
+}
+
+/* ─── Global reset ───────────────────────────────────────────────────────── */
+*, *::before, *::after {
+  border-radius: 0 !important;
+  box-sizing: border-box;
+}
+
+html, body {
+  background-color: #1e1e1e;
+  color: #f5f5f5;
+  font-family: "Ubuntu", "Inter", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Scrollbar ──────────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--ubuntu-bg); }
+::-webkit-scrollbar-thumb { background: var(--ubuntu-border); }
+::-webkit-scrollbar-thumb:hover { background: #4a4a4a; }
+
+/* ─── Flex min-size fix ──────────────────────────────────────────────────── */
+.flex { min-width: 0; min-height: 0; }
+
+/* ─── Container ──────────────────────────────────────────────────────────── */
+.container {
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+
+@media (min-width: 1280px) { .container { max-width: 1280px; } }
+
+/* ─── Ubuntu button scale ────────────────────────────────────────────────── */
+button:active { transform: scale(0.97); }
+
+/* ─── Slider track ───────────────────────────────────────────────────────── */
+input[type="range"] {
+  accent-color: var(--ubuntu-blue);
+}
+
+/* ─── Select / Input focus ───────────────────────────────────────────────── */
+select:focus, input:focus, textarea:focus {
+  outline: 1px solid var(--ubuntu-blue);
+  outline-offset: 0;
+}
+
+/* ─── Animations ─────────────────────────────────────────────────────────── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.22s cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, #2f2f2f 25%, #3a3a3a 50%, #2f2f2f 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+}
