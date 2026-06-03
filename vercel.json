@@ -2,15 +2,11 @@
   "buildCommand": "pnpm run build",
   "outputDirectory": "dist",
   "devCommand": "pnpm run dev",
-  "public": "dist/public",
+  "public": true,
   "rewrites": [
     {
       "source": "/api/(.*)",
       "destination": "/dist/index.js"
-    },
-    {
-      "source": "/(.*)",
-      "destination": "/dist/public/$1"
     },
     {
       "source": "/(.*)",
