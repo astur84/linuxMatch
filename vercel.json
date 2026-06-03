@@ -1,16 +1,20 @@
 {
   "buildCommand": "pnpm run build",
-  "outputDirectory": "dist",
+  "outputDirectory": "dist/public",
   "devCommand": "pnpm run dev",
-  "public": true,
+  "functions": {
+    "api/index.ts": {
+      "runtime": "nodejs20.x"
+    }
+  },
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "/dist/index.js"
+      "destination": "/api"
     },
     {
       "source": "/(.*)",
-      "destination": "/dist/public/index.html"
+      "destination": "/index.html"
     }
   ]
 }
