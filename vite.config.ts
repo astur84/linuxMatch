@@ -164,6 +164,13 @@ export default defineConfig({
   envDir: path.resolve(import.meta.dirname),
   root: path.resolve(import.meta.dirname, "client"),
   publicDir: path.resolve(import.meta.dirname, "client", "public"),
+  
+  // Mapeo forzado de variables para el cliente (Solución al error de Supabase)
+  define: {
+    "process.env.SUPABASE_URL": JSON.stringify(process.env.SUPABASE_URL),
+    "process.env.SUPABASE_ANON_KEY": JSON.stringify(process.env.SUPABASE_ANON_KEY),
+  },
+
   build: {
     outDir: path.resolve(import.meta.dirname, "dist/public"),
     emptyOutDir: true,
