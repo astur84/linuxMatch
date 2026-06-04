@@ -1,17 +1,14 @@
+import { createClient } from "@supabase/supabase-js";
+
+// Exportamos constantes compartidas si las necesitas
 export { COOKIE_NAME, ONE_YEAR_MS } from "@shared/const";
 
-// Generate login URL at runtime so redirect URI reflects the current origin.
-export const getLoginUrl = () => {
-  const oauthPortalUrl = import.meta.env.VITE_OAUTH_PORTAL_URL;
-  const appId = import.meta.env.VITE_APP_ID;
-  const redirectUri = `${window.location.origin}/api/oauth/callback`;
-  const state = btoa(redirectUri);
+const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
+const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
-  const url = new URL(`${oauthPortalUrl}/app-auth`);
-  url.searchParams.set("appId", appId);
-  url.searchParams.set("redirectUri", redirectUri);
-  url.searchParams.set("state", state);
-  url.searchParams.set("type", "signIn");
+if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
+  console.error("⚠️ Falta configurar las variables de entorno de Supabase en el cliente.");
+}
 
-  return url.toString();
-};
+// Cliente de Supabase para el frontend (usa la clave anon, NO la service_role)
+export const supabase = createClient(SUPABASE_URL || "", SUPABASE_ANON_KEY || "");
