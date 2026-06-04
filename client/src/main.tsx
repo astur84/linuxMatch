@@ -5,8 +5,7 @@ import { httpBatchLink, TRPCClientError } from "@trpc/client";
 import { createRoot } from "react-dom/client";
 import superjson from "superjson";
 import App from "./App";
-import { getLoginUrl } from "./const";
-import "./index.css";
+import "./index.css"; // Eliminada la importación de getLoginUrl
 
 const queryClient = new QueryClient();
 
@@ -18,7 +17,8 @@ const redirectToLoginIfUnauthorized = (error: unknown) => {
 
   if (!isUnauthorized) return;
 
-  window.location.href = getLoginUrl();
+  // Redirigimos a la ruta interna de login que has creado en tus páginas
+  window.location.href = "/login";
 };
 
 queryClient.getQueryCache().subscribe(event => {
