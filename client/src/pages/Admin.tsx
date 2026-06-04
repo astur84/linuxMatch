@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
+import { Link } from "wouter"; // Importación añadida para navegación interna
 
 interface DistroForm {
   name: string;
@@ -70,7 +71,7 @@ export default function Admin() {
 
   const deleteMutation = trpc.distros.delete.useMutation({
     onSuccess: () => {
-      toast.success("Distribución eliminada.");
+      toast.success("Distribuciónax eliminada.");
       utils.distros.list.invalidate();
       setDeleteConfirm(null);
     },
@@ -147,13 +148,15 @@ export default function Admin() {
         <Terminal size={48} style={{ color: "#373737" }} />
         <p className="text-white text-lg font-medium">Acceso restringido</p>
         <p style={{ color: "#808080" }} className="text-sm">Debes iniciar sesión para acceder al panel de administración.</p>
-        <a
-          href={getLoginUrl()}
-          className="px-6 py-3 text-sm font-medium text-white no-underline"
-          style={{ backgroundColor: "#2E96FF" }}
-        >
-          Iniciar Sesión
-        </a>
+        {/* Cambiado a Link de wouter apuntando a la ruta interna /login */}
+        <Link href="/login">
+          <span
+            className="px-6 py-3 text-sm font-medium text-white no-underline cursor-pointer"
+            style={{ backgroundColor: "#2E96FF" }}
+          >
+            Iniciar Sesión
+          </span>
+        </Link>
       </div>
     );
   }
@@ -182,8 +185,8 @@ export default function Admin() {
           {!showForm && (
             <button
               onClick={() => { setForm(EMPTY_FORM); setEditId(null); setShowForm(true); }}
-              className="flex items-center gap-2 px-5 py-2.5 text-sm font-medium text-white transition-opacity hover:opacity-90"
-              style={{ backgroundColor: "#0E8420" }}
+              className="flex items-center gap-2 px-5 py-2.5 text-sm font-medium text-white transition-opacity hover:opacity-90 cursor-pointer"
+              style={{ backgroundColor: "#0E8420", border: "none" }}
             >
               <Plus size={15} />
               Nueva Distribución
@@ -230,8 +233,8 @@ export default function Admin() {
                     type="button"
                     disabled={!form.name || wikiMutation.isPending}
                     onClick={() => wikiMutation.mutate({ name: form.name })}
-                    className="flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-white whitespace-nowrap transition-opacity disabled:opacity-50"
-                    style={{ backgroundColor: "#2E96FF" }}
+                    className="flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-white whitespace-nowrap transition-opacity disabled:opacity-50 cursor-pointer"
+                    style={{ backgroundColor: "#2E96FF", border: "none" }}
                   >
                     {wikiMutation.isPending ? (
                       <Loader2 size={14} className="animate-spin" />
@@ -328,8 +331,8 @@ export default function Admin() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="flex items-center gap-2 px-6 py-3 text-sm font-medium text-white transition-opacity disabled:opacity-60"
-                  style={{ backgroundColor: "#0E8420" }}
+                  className="flex items-center gap-2 px-6 py-3 text-sm font-medium text-white transition-opacity disabled:opacity-60 cursor-pointer"
+                  style={{ backgroundColor: "#0E8420", border: "none" }}
                 >
                   {isSubmitting ? (
                     <Loader2 size={14} className="animate-spin" />
@@ -341,7 +344,7 @@ export default function Admin() {
                 <button
                   type="button"
                   onClick={resetForm}
-                  className="px-6 py-3 text-sm transition-colors"
+                  className="px-6 py-3 text-sm transition-colors cursor-pointer"
                   style={{ border: "1px solid #373737", backgroundColor: "transparent", color: "#808080" }}
                   onMouseEnter={(e) => {
                     (e.currentTarget as HTMLButtonElement).style.color = "white";
