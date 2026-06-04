@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import NotFound from "@/pages/NotFound";
 import Home from "@/pages/Home";
 import Admin from "@/pages/Admin";
+import LoginPage from "@/pages/login"; // 1. Importamos la nueva página de Login
 import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
@@ -37,6 +38,8 @@ function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
+      {/* 2. Registramos la ruta /login */}
+      <Route path="/login" component={LoginPage} /> 
       <Route path="/admin" component={Admin} />
       <Route path="/404" component={NotFound} />
       <Route component={NotFound} />
