@@ -1,5 +1,4 @@
 import { useAuth } from "@/_core/hooks/useAuth";
-import { getLoginUrl } from "@/const";
 import { Plus, Terminal } from "lucide-react";
 import { Link } from "wouter";
 
@@ -60,16 +59,17 @@ export default function Navbar() {
             </button>
           </>
         ) : (
-          <a
-            href={getLoginUrl()}
+          /* Cambiado a Link de wouter apuntando a la ruta interna /login */
+          <Link
+            href="/login"
             style={{
               border: "1px solid #373737",
               color: "#2E96FF",
             }}
-            className="px-4 h-9 text-sm flex items-center hover:border-[#2E96FF] transition-colors no-underline"
+            className="px-4 h-9 text-sm flex items-center hover:border-[#2E96FF] transition-colors no-underline cursor-pointer"
           >
             Iniciar Sesión
-          </a>
+          </Link>
         )}
       </div>
     </header>
